@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HMSWpfApplication", "HMSWpfApplication\HMSWpfApplication.csproj", "{6BAAA0B2-8A07-4066-BF60-6B7E6C497453}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6BAAA0B2-8A07-4066-BF60-6B7E6C497453}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6BAAA0B2-8A07-4066-BF60-6B7E6C497453}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6BAAA0B2-8A07-4066-BF60-6B7E6C497453}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6BAAA0B2-8A07-4066-BF60-6B7E6C497453}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(CodealikeProperties) = postSolution
+		SolutionGuid = 6c59cb10-f70c-4d33-81df-fd0e46497492
+	EndGlobalSection
+EndGlobal

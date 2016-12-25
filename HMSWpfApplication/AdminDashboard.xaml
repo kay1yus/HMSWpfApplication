@@ -1,0 +1,1744 @@
+﻿<Window
+    x:Class="HMSWpfApplication.AdminDashboard"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:HMSWpfApplication"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="AdminDashboard"
+    Width="900"
+    Height="700"
+    Loaded="Window_Loaded"
+    mc:Ignorable="d">
+    <Window.Resources>
+        <CollectionViewSource x:Key="wardViewSource" d:DesignSource="{d:DesignInstance {x:Type local:Ward}, CreateList=True}" />
+        <CollectionViewSource x:Key="doctorViewSource" d:DesignSource="{d:DesignInstance {x:Type local:Doctor}, CreateList=True}" />
+        <CollectionViewSource x:Key="patientViewSource" d:DesignSource="{d:DesignInstance {x:Type local:Patient}, CreateList=True}" />
+        <CollectionViewSource x:Key="patientAppointmentsViewSource" Source="{Binding Appointments, Source={StaticResource patientViewSource}}" />
+        <CollectionViewSource x:Key="admissionViewSource" d:DesignSource="{d:DesignInstance {x:Type local:Admission}, CreateList=True}" />
+        <CollectionViewSource x:Key="billViewSource" d:DesignSource="{d:DesignInstance {x:Type local:Bill}, CreateList=True}" />
+        <CollectionViewSource x:Key="userViewSource" d:DesignSource="{d:DesignInstance {x:Type local:User}, CreateList=True}" />
+    </Window.Resources>
+
+
+    <Grid Height="669" DataContext="{StaticResource wardViewSource}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="428.916" />
+            <ColumnDefinition Width="258" />
+            <ColumnDefinition Width="auto" MinWidth="442" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <StackPanel
+            x:Name="stackPnlAdmin"
+            Grid.Row="1"
+            Grid.RowSpan="8"
+            Width="201"
+            Height="579"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Background="#FF020521">
+            <StackPanel Height="102">
+                <DockPanel Height="90" LastChildFill="False">
+                    <Image
+                        x:Name="image"
+                        Width="86"
+                        Height="80"
+                        Margin="5,10,5,0"
+                        VerticalAlignment="Top"
+                        Source="Media/admin.jpg" />
+                    <Label
+                        x:Name="lblWelcome"
+                        Width="90"
+                        Height="47"
+                        Margin="0,29,0,0"
+                        VerticalAlignment="Top"
+                        Content="Label" />
+                </DockPanel>
+            </StackPanel>
+            <Button
+                x:Name="btnWard"
+                Height="40"
+                Margin="3,3"
+                Click="btnWard_Click"
+                Content="Wards"
+                FontSize="16"
+                FontWeight="Bold" />
+            <Button
+                x:Name="btnDoctor"
+                Height="40"
+                Margin="3,3"
+                Click="btnDoctor_Click"
+                Content="Doctors"
+                FontSize="16"
+                FontWeight="Bold" />
+            <Button
+                x:Name="btnPatient"
+                Height="40"
+                Margin="3,3"
+                Click="btnPatient_Click"
+                Content="Patients"
+                FontSize="16"
+                FontWeight="Bold" />
+            <Button
+                x:Name="btnApptment"
+                Height="40"
+                Margin="3,3"
+                Click="btnApptment_Click"
+                Content="Appointments"
+                FontSize="16"
+                FontWeight="Bold" />
+            <Button
+                x:Name="btnBills"
+                Height="40"
+                Margin="3,3"
+                Click="btnBills_Click"
+                Content="Bills"
+                FontSize="16"
+                FontWeight="Bold" />
+            <Button
+                x:Name="btnUserAcct"
+                Height="40"
+                Margin="3,3"
+                Click="btnUserAcct_Click"
+                Content="UserAccount"
+                FontSize="16"
+                FontWeight="Bold" />
+            <Button
+                x:Name="btnAdmission"
+                Height="40"
+                Margin="3,3"
+                Click="btnAdmission_Click"
+                Content="Admissions"
+                FontSize="16"
+                FontWeight="Bold" />
+        </StackPanel>
+        <Grid
+            x:Name="welcomePage"
+            Grid.Row="1"
+            Grid.RowSpan="6"
+            Grid.Column="1"
+            Grid.ColumnSpan="3"
+            Width="676"
+            Height="459"
+            Margin="15,28,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Visibility="Collapsed">
+            <Controls:Tile
+                x:Name="tlWard"
+                Width="150"
+                Height="150"
+                Margin="30,62,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
+                Background="Blue"
+                Click="tlWard_Click"
+                Content="Ward"
+                FontSize="18"
+                FontWeight="Bold"
+                Foreground="White" />
+
+            <Controls:Tile
+                x:Name="tlAdmission"
+                Width="150"
+                Height="150"
+                Margin="480,251,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
+                Background="Blue"
+                Click="tlAdmission_Click"
+                Content="Admission"
+                FontSize="18"
+                FontWeight="Bold"
+                Foreground="White" />
+
+            <Controls:Tile
+                x:Name="tlBills"
+                Width="150"
+                Height="150"
+                Margin="256,251,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
+                Background="Blue"
+                Click="tlBills_Click"
+                Content="Bills"
+                FontSize="18"
+                FontWeight="Bold"
+                Foreground="White"
+                RenderTransformOrigin="0.262,0.467" />
+
+            <Controls:Tile
+                x:Name="tlApptment"
+                Width="150"
+                Height="150"
+                Margin="30,251,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
+                Background="Blue"
+                Click="tlApptment_Click"
+                Content="Appointment"
+                FontSize="18"
+                FontWeight="Bold"
+                Foreground="White" />
+
+            <Controls:Tile
+                x:Name="tlDoctor"
+                Width="150"
+                Height="150"
+                Margin="480,62,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
+                Background="Blue"
+                Click="tlDoctor_Click"
+                Content="Doctors"
+                FontSize="18"
+                FontWeight="Bold"
+                Foreground="White" />
+
+            <Controls:Tile
+                x:Name="tlPatients"
+                Width="150"
+                Height="150"
+                Margin="256,62,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
+                Background="Blue"
+                Click="tlPatients_Click"
+                Content="Patients"
+                FontSize="18"
+                FontWeight="Bold"
+                Foreground="White" />
+        </Grid>
+        <Label
+            x:Name="lblMainHeader"
+            Grid.Column="1"
+            Grid.ColumnSpan="2"
+            Width="501"
+            Height="38"
+            Margin="49,11,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="HEALTH MANAGEMENT SYSTEM APPLICATION"
+            FontSize="22"
+            FontWeight="Bold"
+            Foreground="DarkBlue" />
+        <Label
+            x:Name="lblDash"
+            Grid.Column="1"
+            Width="180"
+            Height="34"
+            Margin="228,55,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Admin Dashboard"
+            FontSize="18"
+            FontWeight="Bold"
+            Foreground="DarkBlue" />
+        <Button
+            x:Name="btnLogOut"
+            Grid.Column="3"
+            Width="53"
+            Height="25"
+            Margin="138,23,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Background="DarkRed"
+            Click="btnLogOut_Click"
+            Content="Log Out"
+            FontWeight="Bold"
+            Foreground="white" />
+        <DataGrid
+            x:Name="wardDataGrid"
+            Grid.Row="2"
+            Grid.RowSpan="2"
+            Grid.Column="1"
+            Margin="49,48,30,44"
+            AutoGenerateColumns="False"
+            EnableRowVirtualization="True"
+            ItemsSource="{Binding}"
+            RowDetailsVisibilityMode="VisibleWhenSelected"
+            Visibility="Collapsed">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn
+                    x:Name="dateCreatedColumn"
+                    Width="SizeToHeader"
+                    Header="Date Created">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <DatePicker SelectedDate="{Binding DateCreated, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn
+                    x:Name="numBedsColumn"
+                    Width="SizeToHeader"
+                    Binding="{Binding NumBeds}"
+                    Header="Num Beds" />
+                <DataGridTextColumn
+                    x:Name="numRoomColumn"
+                    Width="SizeToHeader"
+                    Binding="{Binding NumRoom}"
+                    Header="Num Room" />
+                <DataGridTextColumn
+                    x:Name="wardIDColumn"
+                    Width="SizeToHeader"
+                    Binding="{Binding WardID}"
+                    Header="Ward ID" />
+                <DataGridTextColumn
+                    x:Name="wardNameColumn"
+                    Width="SizeToHeader"
+                    Binding="{Binding WardName}"
+                    Header="Ward Name" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <Grid
+            x:Name="wardDetailGrid"
+            Grid.Row="2"
+            Grid.RowSpan="4"
+            Grid.Column="2"
+            Width="222"
+            Height="160"
+            Margin="24,34,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Visibility="Collapsed">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Label
+                Grid.Row="0"
+                Grid.Column="0"
+                Margin="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Content="Date Created:" />
+            <DatePicker
+                x:Name="dateCreatedDatePicker"
+                Grid.Row="0"
+                Grid.Column="1"
+                Margin="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                SelectedDate="{Binding DateCreated, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+            <Label
+                Grid.Row="1"
+                Grid.Column="0"
+                Margin="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Content="Num Beds:" />
+            <TextBox
+                x:Name="numBedsTextBox"
+                Grid.Row="1"
+                Grid.Column="1"
+                Width="120"
+                Height="23"
+                Margin="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Text="{Binding NumBeds, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+            <Label
+                Grid.Row="2"
+                Grid.Column="0"
+                Margin="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Content="Num Room:" />
+            <TextBox
+                x:Name="numRoomTextBox"
+                Grid.Row="2"
+                Grid.Column="1"
+                Width="120"
+                Height="23"
+                Margin="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Text="{Binding NumRoom, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+            <Label
+                Grid.Row="3"
+                Grid.Column="0"
+                Margin="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Content="Ward ID:" />
+            <TextBox
+                x:Name="wardIDTextBox"
+                Grid.Row="3"
+                Grid.Column="1"
+                Width="120"
+                Height="23"
+                Margin="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Text="{Binding WardID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+            <Label
+                Grid.Row="4"
+                Grid.Column="0"
+                Margin="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Content="Ward Name:" />
+            <TextBox
+                x:Name="wardNameTextBox"
+                Grid.Row="4"
+                Grid.Column="1"
+                Width="120"
+                Height="23"
+                Margin="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Text="{Binding WardName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+        </Grid>
+        <StackPanel
+            x:Name="NavButtons"
+            Grid.Row="2"
+            Grid.Column="1"
+            Width="153"
+            Height="36"
+            Margin="170,13,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Background="Gainsboro"
+            DataContext="{StaticResource wardViewSource}"
+            Orientation="Horizontal"
+            Visibility="Collapsed">
+            <Button
+                x:Name="btnDelete"
+                Width="47"
+                Height="36"
+                VerticalAlignment="Top"
+                Click="btnDelete_Click"
+                Content="Delete"
+                FontSize="11" />
+            <Button
+                x:Name="btnAdd"
+                Width="53"
+                Click="btnAdd_Click"
+                Content="New"
+                FontSize="11" />
+            <Button
+                x:Name="btnUpdate"
+                Width="55"
+                Height="36"
+                VerticalAlignment="Top"
+                Click="btnUpdate_Click"
+                Content="Update"
+                FontSize="11" />
+        </StackPanel>
+        <Grid
+            x:Name="newWardDetailGrid"
+            Grid.Row="1"
+            Grid.Column="3"
+            Width="0"
+            Height="0"
+            Margin="23,14,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Visibility="Collapsed">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Label
+                Grid.Row="0"
+                Grid.Column="0"
+                Margin="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Content="Date Created:" />
+            <DatePicker
+                x:Name="dateCreatedDatePicker1"
+                Grid.Row="0"
+                Grid.Column="1"
+                Margin="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                SelectedDate="{Binding DateCreated, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+            <Label
+                Grid.Row="1"
+                Grid.Column="0"
+                Margin="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Content="Num Beds:" />
+            <TextBox
+                x:Name="numBedsTextBox1"
+                Grid.Row="1"
+                Grid.Column="1"
+                Width="120"
+                Height="23"
+                Margin="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Text="{Binding NumBeds, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+            <Label
+                Grid.Row="2"
+                Grid.Column="0"
+                Margin="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Content="Num Room:" />
+            <TextBox
+                x:Name="numRoomTextBox1"
+                Grid.Row="2"
+                Grid.Column="1"
+                Width="120"
+                Height="23"
+                Margin="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Text="{Binding NumRoom, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+            <Label
+                Grid.Row="3"
+                Grid.Column="0"
+                Margin="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Content="Ward ID:" />
+            <TextBox
+                x:Name="wardIDTextBox1"
+                Grid.Row="3"
+                Grid.Column="1"
+                Width="120"
+                Height="23"
+                Margin="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Text="{Binding WardID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+            <Label
+                Grid.Row="4"
+                Grid.Column="0"
+                Margin="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Content="Ward Name:" />
+            <TextBox
+                x:Name="wardNameTextBox1"
+                Grid.Row="4"
+                Grid.Column="1"
+                Width="120"
+                Height="23"
+                Margin="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Text="{Binding WardName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+
+        </Grid>
+        <Button
+            x:Name="btnSaveWard"
+            Grid.Row="4"
+            Grid.Column="3"
+            Width="60"
+            Height="25"
+            Margin="114,47,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="btnSaveWard_Click"
+            Content="Save"
+            FontWeight="Bold"
+            Visibility="Collapsed" />
+        <DataGrid
+            x:Name="doctorDataGrid"
+            Grid.Row="3"
+            Grid.Column="1"
+            Margin="49,29,21,9"
+            AutoGenerateColumns="False"
+            EnableRowVirtualization="True"
+            ItemsSource="{Binding Source={StaticResource doctorViewSource}}"
+            RowDetailsVisibilityMode="VisibleWhenSelected"
+            Visibility="Collapsed">
+            <DataGrid.Columns>
+                <DataGridTextColumn
+                    x:Name="doctorIDColumn"
+                    Width="SizeToHeader"
+                    Binding="{Binding DoctorID}"
+                    Header="Doctor ID" />
+                <DataGridTextColumn
+                    x:Name="doctorNameColumn"
+                    Width="SizeToHeader"
+                    Binding="{Binding DoctorName}"
+                    Header="Doctor Name" />
+                <DataGridTextColumn
+                    x:Name="phoneNoColumn"
+                    Width="SizeToHeader"
+                    Binding="{Binding PhoneNo}"
+                    Header="Phone No" />
+                <DataGridTextColumn
+                    x:Name="roomNoColumn"
+                    Width="SizeToHeader"
+                    Binding="{Binding RoomNo}"
+                    Header="Room No" />
+                <DataGridTextColumn
+                    x:Name="sexColumn"
+                    Width="SizeToHeader"
+                    Binding="{Binding Sex}"
+                    Header="Sex" />
+                <DataGridTextColumn
+                    x:Name="specialtyColumn"
+                    Width="SizeToHeader"
+                    Binding="{Binding Specialty}"
+                    Header="Specialty" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <Grid
+            x:Name="doctorDetailGrid"
+            Grid.Row="3"
+            Grid.RowSpan="2"
+            Grid.Column="2"
+            Width="216"
+            Height="192"
+            Margin="24,20,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            DataContext="{StaticResource doctorViewSource}"
+            Visibility="Collapsed">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Label
+                Grid.Row="0"
+                Grid.Column="0"
+                Margin="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Content="Doctor ID:" />
+            <TextBox
+                x:Name="doctorIDTextBox"
+                Grid.Row="0"
+                Grid.Column="1"
+                Width="120"
+                Height="23"
+                Margin="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Text="{Binding DoctorID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+            <Label
+                Grid.Row="1"
+                Grid.Column="0"
+                Margin="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Content="Doctor Name:" />
+            <TextBox
+                x:Name="doctorNameTextBox"
+                Grid.Row="1"
+                Grid.Column="1"
+                Width="120"
+                Height="23"
+                Margin="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Text="{Binding DoctorName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+            <Label
+                Grid.Row="2"
+                Grid.Column="0"
+                Margin="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Content="Phone No:" />
+            <TextBox
+                x:Name="phoneNoTextBox"
+                Grid.Row="2"
+                Grid.Column="1"
+                Width="120"
+                Height="23"
+                Margin="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Text="{Binding PhoneNo, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+            <Label
+                Grid.Row="3"
+                Grid.Column="0"
+                Margin="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Content="Room No:" />
+            <TextBox
+                x:Name="roomNoTextBox"
+                Grid.Row="3"
+                Grid.Column="1"
+                Width="120"
+                Height="23"
+                Margin="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Text="{Binding RoomNo, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+            <Label
+                Grid.Row="4"
+                Grid.Column="0"
+                Margin="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Content="Sex:" />
+            <TextBox
+                x:Name="sexTextBox"
+                Grid.Row="4"
+                Grid.Column="1"
+                Width="120"
+                Height="23"
+                Margin="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Text="{Binding Sex, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+            <Label
+                Grid.Row="5"
+                Grid.Column="0"
+                Margin="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Content="Specialty:" />
+            <TextBox
+                x:Name="specialtyTextBox"
+                Grid.Row="5"
+                Grid.Column="1"
+                Width="120"
+                Height="23"
+                Margin="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Text="{Binding Specialty, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+        </Grid>
+
+        <StackPanel
+            x:Name="NavButtonsDoc"
+            Grid.Row="2"
+            Grid.RowSpan="2"
+            Grid.Column="1"
+            Width="153"
+            Height="36"
+            Margin="146,26,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Background="Gainsboro"
+            DataContext="{StaticResource doctorViewSource}"
+            Orientation="Horizontal"
+            Visibility="Collapsed">
+            <Button
+                x:Name="btnDeleteDoc"
+                Width="47"
+                Height="36"
+                VerticalAlignment="Top"
+                Click="btnDeleteDoc_Click"
+                Content="Delete"
+                FontSize="11" />
+            <Button
+                x:Name="btnAddDoc"
+                Width="53"
+                Click="btnAddDoc_Click"
+                Content="New"
+                FontSize="11" />
+            <Button
+                x:Name="btnUpdateDoc"
+                Width="62"
+                Height="36"
+                VerticalAlignment="Top"
+                Click="btnUpdateDoc_Click"
+                Content="Update"
+                FontSize="11" />
+        </StackPanel>
+        <Grid
+            x:Name="newDoctorDetailGrid"
+            Grid.Row="3"
+            Grid.Column="2"
+            Width="0"
+            Height="0"
+            Margin="29,7,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            DataContext="{StaticResource doctorViewSource}"
+            Visibility="Collapsed">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Label
+                Grid.Row="0"
+                Grid.Column="0"
+                Margin="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Content="Doctor ID:" />
+            <TextBox
+                x:Name="doctorIDTextBox1"
+                Grid.Row="0"
+                Grid.Column="1"
+                Width="120"
+                Height="23"
+                Margin="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Text="{Binding DoctorID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+            <Label
+                Grid.Row="1"
+                Grid.Column="0"
+                Margin="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Content="Doctor Name:" />
+            <TextBox
+                x:Name="doctorNameTextBox1"
+                Grid.Row="1"
+                Grid.Column="1"
+                Width="120"
+                Height="23"
+                Margin="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Text="{Binding DoctorName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+            <Label
+                Grid.Row="2"
+                Grid.Column="0"
+                Margin="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Content="Phone No:" />
+            <TextBox
+                x:Name="phoneNoTextBox1"
+                Grid.Row="2"
+                Grid.Column="1"
+                Width="120"
+                Height="23"
+                Margin="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Text="{Binding PhoneNo, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+            <Label
+                Grid.Row="3"
+                Grid.Column="0"
+                Margin="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Content="Room No:" />
+            <TextBox
+                x:Name="roomNoTextBox1"
+                Grid.Row="3"
+                Grid.Column="1"
+                Width="120"
+                Height="23"
+                Margin="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Text="{Binding RoomNo, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+            <Label
+                Grid.Row="4"
+                Grid.Column="0"
+                Margin="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Content="Sex:" />
+            <TextBox
+                x:Name="sexTextBox1"
+                Grid.Row="4"
+                Grid.Column="1"
+                Width="120"
+                Height="23"
+                Margin="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Text="{Binding Sex, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+            <Label
+                Grid.Row="5"
+                Grid.Column="0"
+                Margin="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Content="Specialty:" />
+            <TextBox
+                x:Name="specialtyTextBox1"
+                Grid.Row="5"
+                Grid.Column="1"
+                Width="120"
+                Height="23"
+                Margin="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Text="{Binding Specialty, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+        </Grid>
+        <DataGrid
+            x:Name="patientDataGrid"
+            Grid.Row="4"
+            Grid.Column="1"
+            Grid.ColumnSpan="2"
+            Margin="15,162,28,33"
+            AutoGenerateColumns="False"
+            EnableRowVirtualization="True"
+            ItemsSource="{Binding Source={StaticResource patientViewSource}}"
+            RowDetailsVisibilityMode="VisibleWhenSelected"
+            Visibility="Collapsed">
+            <DataGrid.Columns>
+                <DataGridTextColumn
+                    x:Name="addressColumn"
+                    Width="100"
+                    Binding="{Binding Address}"
+                    Header="Address" />
+                <DataGridTemplateColumn
+                    x:Name="dOBColumn"
+                    Width="90"
+                    Header="DOB">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <DatePicker SelectedDate="{Binding DOB, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTextColumn
+                    x:Name="emailColumn"
+                    Width="100"
+                    Binding="{Binding Email}"
+                    Header="Email" />
+                <DataGridTextColumn
+                    x:Name="firstNameColumn"
+                    Width="SizeToHeader"
+                    Binding="{Binding FirstName}"
+                    Header="First Name" />
+                <DataGridTextColumn
+                    x:Name="lastNameColumn"
+                    Width="SizeToHeader"
+                    Binding="{Binding LastName}"
+                    Header="Last Name" />
+                <DataGridTextColumn
+                    x:Name="patientIDColumn"
+                    Width="SizeToHeader"
+                    Binding="{Binding PatientID}"
+                    Header="Patient ID" />
+                <DataGridTextColumn
+                    x:Name="phoneNoColumn1"
+                    Width="SizeToHeader"
+                    Binding="{Binding PhoneNo}"
+                    Header="Phone No" />
+                <DataGridTextColumn
+                    x:Name="sexColumn1"
+                    Width="40"
+                    Binding="{Binding Sex}"
+                    Header="Sex" />
+                <DataGridTextColumn
+                    x:Name="userIDColumn"
+                    Width="SizeToHeader"
+                    Binding="{Binding UserID}"
+                    Header="User ID" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <WrapPanel
+            x:Name="patientDetailGrid"
+            Grid.Row="4"
+            Grid.Column="1"
+            Width="233"
+            Height="137"
+            Margin="186,10,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Visibility="Collapsed">
+            <Grid
+                x:Name="grid5"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                DataContext="{StaticResource patientViewSource}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Margin="3"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Content="Patient ID:" />
+                <TextBox
+                    x:Name="patientIDTextBox1"
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Width="120"
+                    Height="23"
+                    Margin="3"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Text="{Binding PatientID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+            </Grid>
+            <Grid
+                x:Name="grid6"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                DataContext="{StaticResource patientViewSource}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Margin="3"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Content="First Name:" />
+                <TextBox
+                    x:Name="firstNameTextBox1"
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Width="120"
+                    Height="23"
+                    Margin="3"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Text="{Binding FirstName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+            </Grid>
+            <Grid
+                x:Name="grid7"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                DataContext="{StaticResource patientViewSource}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Margin="3"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Content="Last Name:" />
+                <TextBox
+                    x:Name="lastNameTextBox1"
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Width="120"
+                    Height="23"
+                    Margin="3"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Text="{Binding LastName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+            </Grid>
+            <Grid
+                x:Name="patGrid"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                DataContext="{StaticResource patientViewSource}"
+                Visibility="Visible">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Margin="3"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Content="DOB:" />
+                <DatePicker
+                    x:Name="dOBDatePicker1"
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Width="123"
+                    Margin="35,4,-27,4"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    SelectedDate="{Binding DOB, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+            </Grid>
+        </WrapPanel>
+        <Button
+            x:Name="btnSavePatient"
+            Grid.Row="4"
+            Grid.Column="2"
+            Width="75"
+            Height="27"
+            Margin="57,128,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="btnSavePatient_Click_1"
+            Content="Save"
+            DataContext="{StaticResource patientViewSource}"
+            FontWeight="Bold"
+            Visibility="Collapsed" />
+        <Grid
+            x:Name="appointmentDetailGrid"
+            Grid.Row="3"
+            Grid.RowSpan="2"
+            Grid.Column="2"
+            Margin="10,10,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            DataContext="{StaticResource patientAppointmentsViewSource}"
+            Visibility="Collapsed">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Label
+                Grid.Row="0"
+                Grid.Column="0"
+                Margin="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Content="Appointment Date:" />
+            <DatePicker
+                x:Name="appointmentDateDatePicker"
+                Grid.Row="0"
+                Grid.Column="1"
+                Margin="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                SelectedDate="{Binding AppointmentDate, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+            <Label
+                Grid.Row="1"
+                Grid.Column="0"
+                Margin="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Content="Appointment ID:" />
+            <TextBox
+                x:Name="appointmentIDTextBox"
+                Grid.Row="1"
+                Grid.Column="1"
+                Width="120"
+                Height="23"
+                Margin="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Text="{Binding AppointmentID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+            <Label
+                Grid.Row="2"
+                Grid.Column="0"
+                Margin="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Content="Appointment Time:" />
+            <TextBox
+                x:Name="appointmentTimeTextBox"
+                Grid.Row="2"
+                Grid.Column="1"
+                Width="120"
+                Height="23"
+                Margin="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Text="{Binding AppointmentTime, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+            <Label
+                Grid.Row="3"
+                Grid.Column="0"
+                Margin="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Content="Doctor ID:" />
+            <TextBox
+                x:Name="doctorIDTextBox2"
+                Grid.Row="3"
+                Grid.Column="1"
+                Width="120"
+                Height="23"
+                Margin="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Text="{Binding DoctorID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+            <Label
+                Grid.Row="4"
+                Grid.Column="0"
+                Margin="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Content="Patient ID:" />
+            <TextBox
+                x:Name="patientIDTextBox"
+                Grid.Row="4"
+                Grid.Column="1"
+                Width="120"
+                Height="23"
+                Margin="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Text="{Binding PatientID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+            <Label
+                Grid.Row="5"
+                Grid.Column="0"
+                Margin="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Content="User ID:" />
+            <TextBox
+                x:Name="userIDTextBox"
+                Grid.Row="5"
+                Grid.Column="1"
+                Width="120"
+                Height="23"
+                Margin="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Text="{Binding UserID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+        </Grid>
+        <DataGrid
+            x:Name="appointmentsDataGrid"
+            Grid.Row="3"
+            Grid.RowSpan="2"
+            Grid.Column="1"
+            Grid.ColumnSpan="2"
+            Margin="5,2,253,12"
+            AutoGenerateColumns="False"
+            EnableRowVirtualization="True"
+            ItemsSource="{Binding Source={StaticResource patientAppointmentsViewSource}}"
+            RowDetailsVisibilityMode="VisibleWhenSelected"
+            Visibility="Collapsed">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn
+                    x:Name="appointmentDateColumn"
+                    Width="85"
+                    Header="Apptment Date">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <DatePicker SelectedDate="{Binding AppointmentDate, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn
+                    x:Name="appointmentIDColumn"
+                    Width="80"
+                    Binding="{Binding AppointmentID}"
+                    Header="Apptment ID" />
+                <DataGridTextColumn
+                    x:Name="appointmentTimeColumn"
+                    Width="90"
+                    Binding="{Binding AppointmentTime}"
+                    Header="Apptment Time" />
+                <DataGridTextColumn
+                    x:Name="doctorIDColumn1"
+                    Width="SizeToHeader"
+                    Binding="{Binding DoctorID}"
+                    Header="Doctor ID" />
+                <DataGridTextColumn
+                    x:Name="patientIDColumn1"
+                    Width="SizeToHeader"
+                    Binding="{Binding PatientID}"
+                    Header="Patient ID" />
+                <DataGridTextColumn
+                    x:Name="userIDColumn1"
+                    Width="SizeToHeader"
+                    Binding="{Binding UserID}"
+                    Header="User ID" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <Grid
+            x:Name="admissionDetailGrid"
+            Grid.Row="2"
+            Grid.Column="2"
+            Margin="29,13,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            DataContext="{StaticResource admissionViewSource}"
+            Visibility="Collapsed">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Label
+                Grid.Row="0"
+                Grid.Column="0"
+                Margin="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Content="Admission ID:" />
+            <TextBox
+                x:Name="admisionIDTextBox"
+                Grid.Row="0"
+                Grid.Column="1"
+                Width="120"
+                Height="23"
+                Margin="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Text="{Binding AdmisionID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+            <Label
+                Grid.Row="1"
+                Grid.Column="0"
+                Margin="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Content="Date IN:" />
+            <TextBox
+                x:Name="dateINTextBox"
+                Grid.Row="1"
+                Grid.Column="1"
+                Width="120"
+                Height="23"
+                Margin="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Text="{Binding DateIN, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+            <Label
+                Grid.Row="2"
+                Grid.Column="0"
+                Margin="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Content="Date OUT:" />
+            <TextBox
+                x:Name="dateOUTTextBox"
+                Grid.Row="2"
+                Grid.Column="1"
+                Width="120"
+                Height="23"
+                Margin="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Text="{Binding DateOUT, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+            <Label
+                Grid.Row="3"
+                Grid.Column="0"
+                Margin="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Content="Doctor ID:" />
+            <TextBox
+                x:Name="doctorIDTextBox3"
+                Grid.Row="3"
+                Grid.Column="1"
+                Width="120"
+                Height="23"
+                Margin="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Text="{Binding DoctorID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+            <Label
+                Grid.Row="4"
+                Grid.Column="0"
+                Margin="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Content="Patient ID:" />
+            <TextBox
+                x:Name="patientIDTextBox2"
+                Grid.Row="4"
+                Grid.Column="1"
+                Width="120"
+                Height="23"
+                Margin="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Text="{Binding PatientID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+            <Label
+                Grid.Row="5"
+                Grid.Column="0"
+                Margin="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Content="Room No:" />
+            <TextBox
+                x:Name="roomNoTextBox2"
+                Grid.Row="5"
+                Grid.Column="1"
+                Width="120"
+                Height="23"
+                Margin="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Text="{Binding RoomNo, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+            <Label
+                Grid.Row="6"
+                Grid.Column="0"
+                Margin="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Content="Ward ID:" />
+            <TextBox
+                x:Name="wardIDTextBox2"
+                Grid.Row="6"
+                Grid.Column="1"
+                Width="120"
+                Height="23"
+                Margin="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Text="{Binding WardID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+        </Grid>
+        <DataGrid
+            x:Name="admissionDataGrid"
+            Grid.Row="2"
+            Grid.Column="1"
+            Grid.ColumnSpan="2"
+            Margin="10,10,248,114"
+            AutoGenerateColumns="False"
+            EnableRowVirtualization="True"
+            ItemsSource="{Binding Source={StaticResource admissionViewSource}}"
+            RowDetailsVisibilityMode="VisibleWhenSelected"
+            Visibility="Collapsed">
+            <DataGrid.Columns>
+                <DataGridTextColumn
+                    x:Name="admisionIDColumn"
+                    Width="SizeToHeader"
+                    Binding="{Binding AdmisionID}"
+                    Header="Admision ID" />
+                <DataGridTextColumn
+                    x:Name="dateINColumn"
+                    Width="SizeToHeader"
+                    Binding="{Binding DateIN}"
+                    Header="Date IN" />
+                <DataGridTextColumn
+                    x:Name="dateOUTColumn"
+                    Width="SizeToHeader"
+                    Binding="{Binding DateOUT}"
+                    Header="Date OUT" />
+                <DataGridTextColumn
+                    x:Name="doctorIDColumn2"
+                    Width="SizeToHeader"
+                    Binding="{Binding DoctorID}"
+                    Header="Doctor ID" />
+                <DataGridTextColumn
+                    x:Name="patientIDColumn2"
+                    Width="SizeToHeader"
+                    Binding="{Binding PatientID}"
+                    Header="Patient ID" />
+                <DataGridTextColumn
+                    x:Name="roomNoColumn1"
+                    Width="SizeToHeader"
+                    Binding="{Binding RoomNo}"
+                    Header="Room No" />
+                <DataGridTextColumn
+                    x:Name="wardIDColumn1"
+                    Width="SizeToHeader"
+                    Binding="{Binding WardID}"
+                    Header="Ward ID" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button
+            x:Name="btnSaveAdmission"
+            Grid.Row="2"
+            Grid.Column="1"
+            Width="75"
+            Height="26"
+            Margin="339,189,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="btnSaveAdmission_Click"
+            Content="Save"
+            DataContext="{StaticResource admissionViewSource}"
+            Visibility="Collapsed" />
+
+        <DataGrid
+            x:Name="billDataGrid"
+            Grid.Row="2"
+            Grid.Column="1"
+            Grid.ColumnSpan="2"
+            Margin="39,6,87,124"
+            AutoGenerateColumns="False"
+            EnableRowVirtualization="True"
+            ItemsSource="{Binding Source={StaticResource billViewSource}}"
+            RowDetailsVisibilityMode="VisibleWhenSelected"
+            Visibility="Collapsed">
+            <DataGrid.Columns>
+                <DataGridTextColumn
+                    x:Name="amountColumn"
+                    Width="SizeToHeader"
+                    Binding="{Binding Amount}"
+                    Header="Amount" />
+                <DataGridTextColumn
+                    x:Name="amt_PaidColumn"
+                    Width="SizeToHeader"
+                    Binding="{Binding Amt_Paid}"
+                    Header="Amt Paid" />
+                <DataGridTextColumn
+                    x:Name="balanceColumn"
+                    Width="SizeToHeader"
+                    Binding="{Binding Balance}"
+                    Header="Balance" />
+                <DataGridTextColumn
+                    x:Name="billIDColumn"
+                    Width="SizeToHeader"
+                    Binding="{Binding BillID}"
+                    Header="Bill ID" />
+                <DataGridTemplateColumn
+                    x:Name="dateCreatedColumn1"
+                    Width="SizeToHeader"
+                    Header="Date Created">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <DatePicker SelectedDate="{Binding DateCreated, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn
+                    x:Name="dateDueColumn"
+                    Width="SizeToHeader"
+                    Header="Date Due">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <DatePicker SelectedDate="{Binding DateDue, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn
+                    x:Name="descriptionColumn"
+                    Width="SizeToHeader"
+                    Binding="{Binding Description}"
+                    Header="Description" />
+                <DataGridTextColumn
+                    x:Name="patientIDColumn3"
+                    Width="SizeToHeader"
+                    Binding="{Binding PatientID}"
+                    Header="Patient ID" />
+                <DataGridTextColumn
+                    x:Name="remarkColumn"
+                    Width="80"
+                    Binding="{Binding Remark}"
+                    Header="Remark" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button
+            x:Name="btnSaveBill"
+            Grid.Row="2"
+            Grid.Column="2"
+            Width="89"
+            Height="26"
+            Margin="82,194,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="btnSaveBill_Click"
+            Content="Save"
+            DataContext="{StaticResource billViewSource}"
+            Visibility="Collapsed" />
+        <Grid
+            x:Name="userDetailGrid"
+            Grid.Row="2"
+            Grid.Column="2"
+            Margin="24,6,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            DataContext="{StaticResource userViewSource}"
+            Visibility="Collapsed">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Label
+                Grid.Row="0"
+                Grid.Column="0"
+                Margin="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Content="Password:" />
+            <TextBox
+                x:Name="passwordTextBox"
+                Grid.Row="0"
+                Grid.Column="1"
+                Width="120"
+                Height="23"
+                Margin="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Text="{Binding Password, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+            <Label
+                Grid.Row="1"
+                Grid.Column="0"
+                Margin="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Content="Role ID:" />
+            <TextBox
+                x:Name="roleIDTextBox"
+                Grid.Row="1"
+                Grid.Column="1"
+                Width="120"
+                Height="23"
+                Margin="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Text="{Binding RoleID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+            <Label
+                Grid.Row="2"
+                Grid.Column="0"
+                Margin="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Content="User ID:" />
+            <TextBox
+                x:Name="userIDTextBox1"
+                Grid.Row="2"
+                Grid.Column="1"
+                Width="120"
+                Height="23"
+                Margin="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Text="{Binding UserID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+            <Label
+                Grid.Row="3"
+                Grid.Column="0"
+                Margin="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Content="User Name:" />
+            <TextBox
+                x:Name="userNameTextBox"
+                Grid.Row="3"
+                Grid.Column="1"
+                Width="120"
+                Height="23"
+                Margin="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Text="{Binding UserName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+            <Label
+                Grid.Row="4"
+                Grid.Column="0"
+                Margin="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Content="User Type:" />
+            <TextBox
+                x:Name="userTypeTextBox"
+                Grid.Row="4"
+                Grid.Column="1"
+                Width="120"
+                Height="23"
+                Margin="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Text="{Binding UserType, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+        </Grid>
+        <Button
+            x:Name="btnSaveUser"
+            Grid.Row="2"
+            Grid.Column="2"
+            Width="75"
+            Margin="152,174,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="btnSaveUser_Click"
+            Content="Save"
+            DataContext="{StaticResource userViewSource}"
+            FontWeight="Bold"
+            Visibility="Collapsed" />
+        <DataGrid
+            x:Name="userDataGrid"
+            Grid.Row="2"
+            Grid.Column="1"
+            Margin="91,13,46,149"
+            AutoGenerateColumns="False"
+            EnableRowVirtualization="True"
+            ItemsSource="{Binding Source={StaticResource userViewSource}}"
+            RowDetailsVisibilityMode="VisibleWhenSelected"
+            Visibility="Collapsed">
+            <DataGrid.Columns>
+                <DataGridTextColumn
+                    x:Name="passwordColumn"
+                    Width="SizeToHeader"
+                    Binding="{Binding Password}"
+                    Header="Password" />
+                <DataGridTextColumn
+                    x:Name="roleIDColumn"
+                    Width="SizeToHeader"
+                    Binding="{Binding RoleID}"
+                    Header="Role ID" />
+                <DataGridTextColumn
+                    x:Name="userIDColumn2"
+                    Width="SizeToHeader"
+                    Binding="{Binding UserID}"
+                    Header="User ID" />
+                <DataGridTextColumn
+                    x:Name="userNameColumn"
+                    Width="SizeToHeader"
+                    Binding="{Binding UserName}"
+                    Header="User Name" />
+                <DataGridTextColumn
+                    x:Name="userTypeColumn"
+                    Width="SizeToHeader"
+                    Binding="{Binding UserType}"
+                    Header="User Type" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+    </Grid>
+
+</Window>
