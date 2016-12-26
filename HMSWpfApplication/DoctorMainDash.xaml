@@ -9,6 +9,7 @@
     Width="900"
     Height="700"
     Loaded="Window_Loaded"
+    WindowStartupLocation="CenterScreen"
     WindowStyle="None"
     mc:Ignorable="d">
     <Window.Resources>

@@ -104,14 +104,7 @@ namespace HMSWpfApplication
             userView.Source = context.Users.Local;
 
           
-        }
-
-        private void btnLogOut_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-            reLogin = new Login();
-            reLogin.Show();
-        }
+        } 
 
         private void btnWard_Click(object sender, RoutedEventArgs e)
         {
@@ -596,14 +589,23 @@ namespace HMSWpfApplication
             }
         }
 
+        //to save/ update bills
         private void btnSaveBill_Click(object sender, RoutedEventArgs e)
         {
             context.SaveChanges();
         }
-
+        //to save/ update user credetials
         private void btnSaveUser_Click(object sender, RoutedEventArgs e)
         {
             context.SaveChanges();
+        }
+
+        //to exit administrator dashboard and navigate back to the Login window
+        private void btnLogOut_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+            reLogin = new Login();
+            reLogin.Show();
         }
     }
 }

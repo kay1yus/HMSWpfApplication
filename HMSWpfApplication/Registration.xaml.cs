@@ -71,5 +71,12 @@ namespace HMSWpfApplication
             this.Close();
             relogin.Show();
         }
+
+        private void btnCloseReg_Click(object sender, RoutedEventArgs e)
+        {
+            Login relogin = new Login();
+            this.Close();
+            relogin.Show();
+        }
     }
 }

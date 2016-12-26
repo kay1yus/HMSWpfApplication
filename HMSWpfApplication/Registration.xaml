@@ -9,7 +9,8 @@
     Width="600"
     Height="500"
     Loaded="Window_Loaded"
-    WindowStyle="ToolWindow"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="None"
     mc:Ignorable="d">
     <Window.Resources>
         <CollectionViewSource x:Key="patientViewSource" d:DesignSource="{d:DesignInstance {x:Type local:Patient}, CreateList=True}" />
@@ -255,7 +256,8 @@
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Click="btnCancel_Click"
-            Content="Cancel" FontWeight="Bold" />
+            Content="Cancel"
+            FontWeight="Bold" />
         <Label
             x:Name="label"
             Width="207"
@@ -266,5 +268,17 @@
             FontSize="14"
             FontWeight="Bold"
             Foreground="DarkBlue" />
+        <Button
+            x:Name="btnCloseReg"
+            Width="21"
+            Margin="537,26,0,442"
+            HorizontalAlignment="Left"
+            BorderBrush="Transparent"
+            Click="btnCloseReg_Click"
+            RenderTransformOrigin="1.015,0.513">
+            <Button.Background>
+                <ImageBrush ImageSource="Media/istop.png" />
+            </Button.Background>
+        </Button>
     </Grid>
 </Window>

@@ -10,7 +10,10 @@
     Width="900"
     Height="700"
     Loaded="Window_Loaded"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="None"
     mc:Ignorable="d">
+
     <Window.Resources>
         <CollectionViewSource x:Key="wardViewSource" d:DesignSource="{d:DesignInstance {x:Type local:Ward}, CreateList=True}" />
         <CollectionViewSource x:Key="doctorViewSource" d:DesignSource="{d:DesignInstance {x:Type local:Doctor}, CreateList=True}" />
@@ -258,19 +261,7 @@
             FontSize="18"
             FontWeight="Bold"
             Foreground="DarkBlue" />
-        <Button
-            x:Name="btnLogOut"
-            Grid.Column="3"
-            Width="53"
-            Height="25"
-            Margin="138,23,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Background="DarkRed"
-            Click="btnLogOut_Click"
-            Content="Log Out"
-            FontWeight="Bold"
-            Foreground="white" />
+
         <DataGrid
             x:Name="wardDataGrid"
             Grid.Row="2"
@@ -1504,7 +1495,7 @@
             Grid.Row="2"
             Grid.Column="1"
             Grid.ColumnSpan="2"
-            Margin="39,6,87,124"
+            Margin="39,6,31,124"
             AutoGenerateColumns="False"
             EnableRowVirtualization="True"
             ItemsSource="{Binding Source={StaticResource billViewSource}}"
@@ -1515,17 +1506,17 @@
                     x:Name="amountColumn"
                     Width="SizeToHeader"
                     Binding="{Binding Amount}"
-                    Header="Amount" />
+                    Header="Amount (€)" />
                 <DataGridTextColumn
                     x:Name="amt_PaidColumn"
                     Width="SizeToHeader"
                     Binding="{Binding Amt_Paid}"
-                    Header="Amt Paid" />
+                    Header="Amt Paid (€)" />
                 <DataGridTextColumn
                     x:Name="balanceColumn"
                     Width="SizeToHeader"
                     Binding="{Binding Balance}"
-                    Header="Balance" />
+                    Header="Balance (€)" />
                 <DataGridTextColumn
                     x:Name="billIDColumn"
                     Width="SizeToHeader"
@@ -1738,6 +1729,19 @@
                     Header="User Type" />
             </DataGrid.Columns>
         </DataGrid>
+        <Button
+            x:Name="btnLogOut"
+            Grid.Column="2"
+            Width="53"
+            Height="25"
+            Margin="182,23,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Background="DarkRed"
+            Click="btnLogOut_Click"
+            Content="Log Out"
+            FontWeight="Bold"
+            Foreground="white" />
 
     </Grid>
 

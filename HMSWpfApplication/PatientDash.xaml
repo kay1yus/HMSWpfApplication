@@ -9,18 +9,21 @@
     Width="800"
     Height="600"
     Loaded="Window_Loaded"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="None"
     mc:Ignorable="d">
     <Window.Resources>
         <CollectionViewSource x:Key="patientViewSource" d:DesignSource="{d:DesignInstance {x:Type local:Patient}, CreateList=True}" />
-        <CollectionViewSource x:Key="billViewSource" d:DesignSource="{d:DesignInstance {x:Type local:Bill}, CreateList=True}" />
         <CollectionViewSource x:Key="appointmentViewSource" d:DesignSource="{d:DesignInstance {x:Type local:Appointment}, CreateList=True}" />
         <CollectionViewSource x:Key="doctorViewSource" d:DesignSource="{d:DesignInstance {x:Type local:Doctor}, CreateList=True}" />
+        <CollectionViewSource x:Key="billViewSource" d:DesignSource="{d:DesignInstance {x:Type local:Bill}, CreateList=True}" />
     </Window.Resources>
 
-    <Grid>
+    <Grid DataContext="{StaticResource billViewSource}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="457" />
+            <ColumnDefinition Width="76" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
@@ -70,10 +73,19 @@
                 Content="Bills"
                 FontSize="16"
                 FontWeight="Bold" />
+            <Button
+                x:Name="btnProfile"
+                Height="40"
+                Margin="3,3"
+                Click="btnProfile_Click"
+                Content="Profile"
+                FontSize="16"
+                FontWeight="Bold" />
         </StackPanel>
         <Label
             x:Name="lblMainHeader"
             Grid.Column="1"
+            Grid.ColumnSpan="2"
             Width="501"
             Height="38"
             Margin="10,10,0,0"
@@ -279,7 +291,7 @@
             Grid.Column="1"
             Width="75"
             Height="28"
-            Margin="277,137,0,-28"
+            Margin="277,137,0,-4"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Click="btnUpdatePat_Click"
@@ -287,77 +299,13 @@
             DataContext="{StaticResource patientViewSource}"
             FontWeight="Bold"
             Visibility="Collapsed" />
-
-        <DataGrid
-            x:Name="billDataGrid"
-            Grid.RowSpan="3"
-            Grid.ColumnSpan="2"
-            Margin="26,33,96,0"
-            AutoGenerateColumns="False"
-            EnableRowVirtualization="True"
-            ItemsSource="{Binding}"
-            RowDetailsVisibilityMode="VisibleWhenSelected"
-            Visibility="Collapsed">
-            <DataGrid.Columns>
-                <DataGridTextColumn
-                    x:Name="amountColumn"
-                    Width="SizeToHeader"
-                    Binding="{Binding Amount}"
-                    Header="Amount" />
-                <DataGridTextColumn
-                    x:Name="amt_PaidColumn"
-                    Width="SizeToHeader"
-                    Binding="{Binding Amt_Paid}"
-                    Header="Amt Paid" />
-                <DataGridTextColumn
-                    x:Name="balanceColumn"
-                    Width="SizeToHeader"
-                    Binding="{Binding Balance}"
-                    Header="Balance" />
-                <DataGridTextColumn
-                    x:Name="billIDColumn"
-                    Width="SizeToHeader"
-                    Binding="{Binding BillID}"
-                    Header="Bill ID" />
-                <DataGridTemplateColumn
-                    x:Name="dateCreatedColumn"
-                    Width="SizeToHeader"
-                    Header="Date Created">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <DatePicker SelectedDate="{Binding DateCreated, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn
-                    x:Name="dateDueColumn"
-                    Width="SizeToHeader"
-                    Header="Date Due">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <DatePicker SelectedDate="{Binding DateDue, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTextColumn
-                    x:Name="descriptionColumn"
-                    Width="SizeToHeader"
-                    Binding="{Binding Description}"
-                    Header="Description" />
-                <DataGridTextColumn
-                    x:Name="remarkColumn"
-                    Width="SizeToHeader"
-                    Binding="{Binding Remark}"
-                    Header="Remark" />
-            </DataGrid.Columns>
-        </DataGrid>
         <Grid
             x:Name="appointmentDataGrid"
             Grid.Column="1"
             Margin="150,136,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            Visibility="Visible">
+            Visibility="Collapsed">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
@@ -440,10 +388,10 @@
         </Grid>
         <Grid
             x:Name="Apptgrid"
-            Grid.Row="2"
-            Grid.ColumnSpan="2"
+            Grid.Row="1"
+            Grid.Column="1"
             Width="244"
-            Margin="159,70,0,0"
+            Margin="150,20,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Visibility="Collapsed">
@@ -475,15 +423,89 @@
 
         <Button
             x:Name="btnAppointmentSubmit"
+            Grid.Row="1"
             Grid.Column="1"
             Width="60"
             Height="25"
-            Margin="319,269,0,0"
+            Margin="334,57,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
+            Click="btnAppointmentSubmit_Click"
             Content="Submit"
             DataContext="{StaticResource appointmentViewSource}"
             FontWeight="Bold"
-            Visibility="Collapsed" Click="btnAppointmentSubmit_Click" />
+            Visibility="Collapsed" />
+        <Button
+            x:Name="btnLogOut"
+            Grid.Column="2"
+            Width="53"
+            Height="25"
+            Margin="66,37,-43,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Background="DarkRed"
+            Click="btnLogOut_Click"
+            Content="Log Out"
+            FontWeight="Bold"
+            Foreground="white" />
+        <DataGrid
+            x:Name="billDataGrid"
+            Grid.RowSpan="2"
+            Grid.Column="1"
+            Grid.ColumnSpan="2"
+            Margin="4,118,46,130"
+            AutoGenerateColumns="False"
+            EnableRowVirtualization="True"
+            ItemsSource="{Binding}"
+            RowDetailsVisibilityMode="VisibleWhenSelected"
+            Visibility="Collapsed">
+            <DataGrid.Columns>
+                <DataGridTextColumn
+                    x:Name="amountColumn"
+                    Width="SizeToHeader"
+                    Binding="{Binding Amount}"
+                    Header="Amount (€)" />
+                <DataGridTextColumn
+                    x:Name="amt_PaidColumn"
+                    Width="SizeToHeader"
+                    Binding="{Binding Amt_Paid}"
+                    Header="Amt Paid (€)" />
+                <DataGridTextColumn
+                    x:Name="balanceColumn"
+                    Width="SizeToHeader"
+                    Binding="{Binding Balance}"
+                    Header="Bal (€)" />
+                <DataGridTextColumn
+                    x:Name="billIDColumn"
+                    Width="SizeToHeader"
+                    Binding="{Binding BillID}"
+                    Header="Bill ID" />
+                <DataGridTemplateColumn
+                    x:Name="dateCreatedColumn"
+                    Width="85"
+                    Header="Date Created">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <DatePicker SelectedDate="{Binding DateCreated, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn
+                    x:Name="dateDueColumn"
+                    Width="85"
+                    Header="Date Due">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <DatePicker SelectedDate="{Binding DateDue, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn
+                    x:Name="descriptionColumn"
+                    Width="SizeToHeader"
+                    Binding="{Binding Description}"
+                    Header="Description" />
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Window>

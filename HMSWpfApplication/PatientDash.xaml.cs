@@ -21,6 +21,7 @@ namespace HMSWpfApplication
     public partial class PatientDash : Window
     {
         HMSAppEntities context = new HMSAppEntities();
+        Login reLogin;
         CollectionViewSource patBillView;
         CollectionViewSource patApptmentView;
         CollectionViewSource patProfileView;
@@ -54,28 +55,22 @@ namespace HMSWpfApplication
             context.Appointments.Load();
             patApptmentView.Source = context.Appointments.Local;
 
-            
+            // billViewSource.Source = [generic data source]
+            System.Windows.Data.CollectionViewSource billViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("billViewSource")));
+            // Load data by setting the CollectionViewSource.Source property:
+            // billViewSource.Source = [generic data source]
         }
 
         private void btnBills_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                patientProfileGrid.Visibility = Visibility.Collapsed;
-                btnUpdatePat.Visibility = Visibility.Collapsed;
-                Apptgrid.Visibility = Visibility.Collapsed;
-                btnAppointmentSubmit.Visibility = Visibility.Collapsed;
-                appointmentDataGrid.Visibility = Visibility.Collapsed;
+                //to hide panels from the window
+                collapsePanels();
+
                 billDataGrid.Visibility = Visibility.Visible;
 
-                //var cur = patBillView.View.CurrentItem as Bill;
-
-               // var cust = (from d in context.Bills
-               //             where d.PatientID == cur.PatientID
-               //             select d).FirstOrDefault();
-
-
-                patBillView.View.Refresh();
+               
             }
             catch (Exception)
             {
@@ -93,9 +88,7 @@ namespace HMSWpfApplication
                 appointmentIDTextBox.Text = Guid.NewGuid().ToString();
 
                 //to hide panels from the window
-                patientProfileGrid.Visibility = Visibility.Collapsed;
-                billDataGrid.Visibility = Visibility.Collapsed;
-                btnUpdatePat.Visibility = Visibility.Collapsed;
+                collapsePanels();
 
 
                 //to show panels in the Patient window
@@ -118,6 +111,34 @@ namespace HMSWpfApplication
         private void btnAppointmentSubmit_Click(object sender, RoutedEventArgs e)
         {
             context.SaveChanges();
+        }
+
+        private void btnLogOut_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+            reLogin = new Login();
+            reLogin.Show();
+        }
+
+        private void btnProfile_Click(object sender, RoutedEventArgs e)
+        {
+            //to hide panels from the window
+            collapsePanels();
+
+            patientProfileGrid.Visibility = Visibility.Visible;
+            btnUpdatePat.Visibility = Visibility.Visible;
+        }
+
+        private void collapsePanels()
+        {
+            patientProfileGrid.Visibility = Visibility.Collapsed;
+            billDataGrid.Visibility = Visibility.Collapsed;
+            btnUpdatePat.Visibility = Visibility.Collapsed;
+            patientProfileGrid.Visibility = Visibility.Collapsed;
+            Apptgrid.Visibility = Visibility.Collapsed;
+            btnAppointmentSubmit.Visibility = Visibility.Collapsed;
+            appointmentDataGrid.Visibility = Visibility.Collapsed;
+
         }
     }
 }
