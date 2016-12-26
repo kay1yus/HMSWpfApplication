@@ -36,6 +36,9 @@ namespace HMSWpfApplication
                (FindResource("appointmentViewSource")));
             DataContext = this;
 
+            patDocView = ((CollectionViewSource)
+              (FindResource("patientViewSource")));
+            DataContext = this;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -46,6 +49,9 @@ namespace HMSWpfApplication
             dbContext.Admissions.Load();
             admissionView.Source = dbContext.Admissions.Local;
 
+            dbContext.Patients.Load();
+            patDocView.Source = dbContext.Patients.Local;
+
             System.Windows.Data.CollectionViewSource appointmentViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("appointmentViewSource")));
             // Load data by setting the CollectionViewSource.Source property:
             // appointmentViewSource.Source = [generic data source]
@@ -53,6 +59,9 @@ namespace HMSWpfApplication
             System.Windows.Data.CollectionViewSource admissionViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("admissionViewSource")));
             // Load data by setting the CollectionViewSource.Source property:
             // admissionViewSource.Source = [generic data source]
+            System.Windows.Data.CollectionViewSource patientViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("patientViewSource")));
+            // Load data by setting the CollectionViewSource.Source property:
+            // patientViewSource.Source = [generic data source]
         }
 
         private void btnApptmentUpdate_Click(object sender, RoutedEventArgs e)
@@ -83,7 +92,12 @@ namespace HMSWpfApplication
 
         private void btnPatient_Click(object sender, RoutedEventArgs e)
         {
+            //to hide other panels
+            collapsePanels();
 
+            //to show patient panel
+            patientDetailGrid.Visibility = Visibility.Visible;
+            patientListView.Visibility = Visibility.Visible;
         }
 
         private void btnAdmission_Click(object sender, RoutedEventArgs e)
@@ -110,6 +124,8 @@ namespace HMSWpfApplication
             admissionDetailGrid.Visibility = Visibility.Collapsed;
             admissionDataGrid.Visibility = Visibility.Collapsed;
             btnAdmissionUpdate.Visibility = Visibility.Collapsed;
+            patientDetailGrid.Visibility = Visibility.Collapsed;
+            patientListView.Visibility = Visibility.Collapsed;
         }
         
     }
