@@ -97,7 +97,7 @@ namespace HMSWpfApplication
 
             //to show patient panel
             patientDetailGrid.Visibility = Visibility.Visible;
-            patientListView.Visibility = Visibility.Visible;
+            patientDataGrid.Visibility = Visibility.Visible;
         }
 
         private void btnAdmission_Click(object sender, RoutedEventArgs e)
@@ -125,7 +125,7 @@ namespace HMSWpfApplication
             admissionDataGrid.Visibility = Visibility.Collapsed;
             btnAdmissionUpdate.Visibility = Visibility.Collapsed;
             patientDetailGrid.Visibility = Visibility.Collapsed;
-            patientListView.Visibility = Visibility.Collapsed;
+            patientDataGrid.Visibility = Visibility.Collapsed;
         }
         
     }

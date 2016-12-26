@@ -156,7 +156,7 @@
             x:Name="appointmentListView"
             Grid.Row="1"
             Grid.Column="2"
-            Margin="446,34,10,430"
+            Margin="446,34,53,430"
             DisplayMemberPath="AppointmentDate"
             ItemsSource="{Binding}"
             RenderTransformOrigin="0.5,0.5"
@@ -167,7 +167,7 @@
             x:Name="appointmentDataGrid"
             Grid.Row="1"
             Grid.Column="2"
-            Margin="101,244,53,157"
+            Margin="101,244,53,170"
             AutoGenerateColumns="False"
             EnableRowVirtualization="True"
             ItemsSource="{Binding}"
@@ -223,6 +223,7 @@
             Click="btnApptmentUpdate_Click"
             Content="Update"
             DataContext="{StaticResource appointmentViewSource}"
+            FontWeight="Bold"
             Visibility="Visible" />
 
 
@@ -521,21 +522,13 @@
             DataContext="{StaticResource admissionViewSource}"
             FontWeight="Bold"
             Visibility="Collapsed" />
-        <ListView
-            x:Name="patientListView"
-            Grid.Row="1"
-            Grid.Column="2"
-            Margin="101,56,445,445"
-            DisplayMemberPath="Address"
-            ItemsSource="{Binding Source={StaticResource patientViewSource}}"
-            SelectedValuePath="Address"
-            SelectionMode="Single"
-            Visibility="Collapsed" />
+
         <Grid
             x:Name="patientDetailGrid"
             Grid.Row="1"
             Grid.Column="2"
-            Margin="226,39,0,0"
+            Height="320"
+            Margin="200,16,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             DataContext="{StaticResource patientViewSource}"
@@ -589,25 +582,7 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
                 SelectedDate="{Binding DOB, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
-            <Label
-                Grid.Row="2"
-                Grid.Column="0"
-                Margin="3"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Center"
-                Content="Doctor:" />
-            <ListView
-                x:Name="doctorListView"
-                Grid.Row="2"
-                Grid.Column="1"
-                Width="100"
-                Height="100"
-                Margin="3"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Center"
-                DisplayMemberPath="Doctor"
-                ItemsSource="{Binding}"
-                SelectionMode="Single" />
+
             <Label
                 Grid.Row="3"
                 Grid.Column="0"
@@ -745,6 +720,86 @@
                 VerticalAlignment="Center"
                 Text="{Binding UserID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
         </Grid>
+        <DataGrid
+            x:Name="patientDataGrid"
+            Grid.Row="1"
+            Grid.Column="2"
+            Margin="23,341,53,42"
+            AutoGenerateColumns="False"
+            EnableRowVirtualization="True"
+            ItemsSource="{Binding Source={StaticResource patientViewSource}}"
+            RowDetailsVisibilityMode="VisibleWhenSelected"
+            Visibility="Collapsed">
+            <DataGrid.Columns>
+                <DataGridTextColumn
+                    x:Name="addressColumn"
+                    Width="SizeToHeader"
+                    Binding="{Binding Address}"
+                    Header="Address" />
+                <DataGridTemplateColumn
+                    x:Name="dOBColumn"
+                    Width="SizeToHeader"
+                    Header="DOB">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <DatePicker SelectedDate="{Binding DOB, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <!--<DataGridTemplateColumn
+                    x:Name="doctorColumn"
+                    Width="SizeToHeader"
+                    Header="Doctor">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ListView>
+                                <ListBoxItem Content="{Binding Doctor}" />
+                            </ListView>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>-->
+                <DataGridTextColumn
+                    x:Name="doctorIDColumn2"
+                    Width="SizeToHeader"
+                    Binding="{Binding DoctorID}"
+                    Header="Doctor ID" />
+                <DataGridTextColumn
+                    x:Name="emailColumn"
+                    Width="SizeToHeader"
+                    Binding="{Binding Email}"
+                    Header="Email" />
+                <DataGridTextColumn
+                    x:Name="firstNameColumn"
+                    Width="SizeToHeader"
+                    Binding="{Binding FirstName}"
+                    Header="First Name" />
+                <DataGridTextColumn
+                    x:Name="lastNameColumn"
+                    Width="SizeToHeader"
+                    Binding="{Binding LastName}"
+                    Header="Last Name" />
+                <DataGridTextColumn
+                    x:Name="patientIDColumn2"
+                    Width="SizeToHeader"
+                    Binding="{Binding PatientID}"
+                    Header="Patient ID" />
+                <DataGridTextColumn
+                    x:Name="phoneNoColumn"
+                    Width="SizeToHeader"
+                    Binding="{Binding PhoneNo}"
+                    Header="Phone No" />
+                <DataGridTextColumn
+                    x:Name="sexColumn"
+                    Width="SizeToHeader"
+                    Binding="{Binding Sex}"
+                    Header="Sex" />
+                <DataGridTextColumn
+                    x:Name="userIDColumn1"
+                    Width="SizeToHeader"
+                    Binding="{Binding UserID}"
+                    Header="User ID" />
+            </DataGrid.Columns>
+        </DataGrid>
 
     </Grid>
 </Window>
