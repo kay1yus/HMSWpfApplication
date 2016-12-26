@@ -22,7 +22,7 @@ namespace HMSWpfApplication
     {
         HMSAppEntities context = new HMSAppEntities();
 
-        private Login relogin = new Login();
+        public Login relogx = new Login();
         CollectionViewSource patDocView;
         CollectionViewSource apptmentView;
         CollectionViewSource admissionView;
@@ -46,90 +46,91 @@ namespace HMSWpfApplication
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            try
-            {
+            //try
+            //{
                 appointmentDataGrid.Visibility = Visibility.Visible;
                 appointmentDetailGrid.Visibility = Visibility.Visible;
 
-                context.Patients.Load();
-                patDocView.Source = context.Patients.Local;
+                //context.Patients.Load();
+                //patDocView.Source = context.Patients.Local;
 
-                context.Appointments.Load();
-                apptmentView.Source = context.Appointments.Local;
+                //context.Appointments.Load();
+                //apptmentView.Source = context.Appointments.Local;
 
                 //context.Admissions.Load();
                 //admissionView.Source = context.Admissions.Local;
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Error Loading panels");
-            }
+            //}
+            //catch (Exception)
+            //{
+            //    MessageBox.Show("Error Loading panels");
+            //}
            
         }
 
         private void btnLogout_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+            relogx.Show();
         }
 
         private void btnPatient_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                //To show patient details om window
-                patientDataGrid.Visibility = Visibility.Visible;
-                docPatientDetailGrid.Visibility = Visibility.Visible;
+            //try
+            //{
+            //    //To show patient details om window
+            //    patientDataGrid.Visibility = Visibility.Visible;
+            //    docPatientDetailGrid.Visibility = Visibility.Visible;
 
-                //To hide appointment details from window
-                appointmentDataGrid.Visibility = Visibility.Collapsed;
-                appointmentDetailGrid.Visibility = Visibility.Collapsed;
-                admissionDataGrid.Visibility = Visibility.Collapsed;
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Error Loading patient details");
-            }
+            //    //To hide appointment details from window
+            //    appointmentDataGrid.Visibility = Visibility.Collapsed;
+            //    appointmentDetailGrid.Visibility = Visibility.Collapsed;
+            //    admissionDataGrid.Visibility = Visibility.Collapsed;
+            //}
+            //catch (Exception)
+            //{
+            //    MessageBox.Show("Error Loading patient details");
+            //}
            
         }
 
         private void btnAdmission_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                //To hide appointment details on window
-                appointmentDataGrid.Visibility = Visibility.Visible;
-                appointmentDetailGrid.Visibility = Visibility.Visible;
+            //try
+            //{
+            //    //To hide appointment details on window
+            //    appointmentDataGrid.Visibility = Visibility.Visible;
+            //    appointmentDetailGrid.Visibility = Visibility.Visible;
 
-                //To hide patient details from window
-                patientDataGrid.Visibility = Visibility.Collapsed;
-                docPatientDetailGrid.Visibility = Visibility.Collapsed;
+            //    //To hide patient details from window
+            //    patientDataGrid.Visibility = Visibility.Collapsed;
+            //    docPatientDetailGrid.Visibility = Visibility.Collapsed;
 
-                admissionDataGrid.Visibility = Visibility.Visible;
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Error Loading admission details");
-            }
+            //    admissionDataGrid.Visibility = Visibility.Visible;
+            //}
+            //catch (Exception)
+            //{
+            //    MessageBox.Show("Error Loading admission details");
+            //}
             
         }
 
         private void btnApptment_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                //To show appointment details on window
-                appointmentDataGrid.Visibility = Visibility.Visible;
-                appointmentDetailGrid.Visibility = Visibility.Visible;
+            //try
+            //{
+            //    //To show appointment details on window
+            //    appointmentDataGrid.Visibility = Visibility.Visible;
+            //    appointmentDetailGrid.Visibility = Visibility.Visible;
 
-                //To hide patient details from window
-                admissionDataGrid.Visibility = Visibility.Collapsed;
-                patientDataGrid.Visibility = Visibility.Collapsed;
-                docPatientDetailGrid.Visibility = Visibility.Collapsed;
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Error Loading appointment details");
-            }
+            //    //To hide patient details from window
+            //    admissionDataGrid.Visibility = Visibility.Collapsed;
+            //    patientDataGrid.Visibility = Visibility.Collapsed;
+            //    docPatientDetailGrid.Visibility = Visibility.Collapsed;
+            //}
+            //catch (Exception)
+            //{
+            //    MessageBox.Show("Error Loading appointment details");
+            //}
             
         }
     }

@@ -22,9 +22,10 @@ namespace HMSWpfApplication
         ////To create an instance of the ModelEntities
         HMSAppEntities context;
         AdminDashboard amw = new AdminDashboard(); 
-        DoctorDash dmv = new DoctorDash();
+        DoctorMainDash dmd = new DoctorMainDash();
         PatientDash pmv = new PatientDash();
         Registration regForm = new Registration();
+
         public Login()
         {
             InitializeComponent();
@@ -59,7 +60,8 @@ namespace HMSWpfApplication
                     }
                     else if (result.RoleID.Equals(2))
                     {
-                        dmv.Show();
+                        dmd.Show();
+                        
                         this.Close();
                     }
                     else if (result.RoleID.Equals(3))
